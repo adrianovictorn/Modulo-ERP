@@ -1,0 +1,366 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins/Poppins-ExtraLight.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+:root {
+    --black: #2A2D34;
+    --gray: #53677E;
+    --light-gray: #B8CECE;
+    --white: #D3E9E7;
+    --red: #C5628B;
+    --green: #02DC97;
+    --blue: #569ED1;
+    --yellow: #FAC682;
+}
+
+/* Components */
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    font-family: "Poppins";
+    background-color: var(--black);
+}
+
+h1, h2, h3, h4, h5, span, a {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    text-decoration: none;
+}
+
+h1 { font-size: 4.2rem; } 
+h2 { font-size: 2.8rem; }
+h3, a { font-size: 2rem; }
+h4 { font-size: 1.6rem; }
+h5 { font-size: 1.4rem; }
+
+input {
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+    background-color: transparent;
+    border: 0px solid transparent;
+    box-shadow: none;
+    font-size: 1.6rem;
+    outline: none;
+    user-select: none;
+}
+
+table, thead, tbody {
+    font-size: 12px;
+    overflow-x: scroll;
+}
+
+td {
+    cursor: pointer;
+}
+
+/* Classes */
+
+.icon {
+    width: 18px; 
+    height: 18px; 
+}
+
+.overflow {
+    overflow-y: scroll;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.overflow::-webkit-scrollbar {
+    display: none; 
+}
+
+.button {
+    color: var(--black);
+    background-color: var(--green);
+    border: 1px solid var(--black);
+    border-radius: 5px;
+    padding: 2rem;
+    cursor: pointer;
+	transition: transform 0.1s ease-in-out;
+    box-shadow: 3px 3px 0 var(--black);
+}
+
+.button:hover {
+    transform: scale(1.02);
+}
+
+.round-button {
+    padding: 1rem;
+    border-radius: 25%;
+    height: 30px;
+    width: 30px;
+    border: 1px solid var(--black);
+    border-bottom: 2px solid var(--black);
+    transition: transform 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.round-button:hover {
+    transform: scale(1.05);
+}
+
+.customer-area {
+    background-color: var(--white);
+    width: 100%;
+    height: 5rem;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+}
+
+.bg-light-gray {
+    background-color: var(--light-gray);
+}
+
+.bg-blue {
+    background-color: var(--blue);
+}
+
+.bg-green {
+    background-color: var(--green);
+}
+
+.bg-red {
+    background-color: var(--red);
+}
+
+.bg-yellow {
+    background-color: var(--yellow);
+}
+
+.bg-black {
+    background-color: var(--black);
+}
+
+.c-white {
+    color: var(--white);
+}
+
+.f-bold {
+    font-weight: 500;
+}
+
+.f-grow {
+    flex-grow: 1;
+}
+
+.align-width {
+    aspect-ratio: 1 / 1;
+}
+
+.fit {
+    width: 100%;
+    height: 100%;
+}
+
+.fit-h {
+    height: 100%;
+}
+
+.fit-w {
+    width: 100%;
+}
+
+.fit-w-mostly {
+    width: 75%;
+}
+
+.fit-w-half {
+    width: 50%;
+}
+
+.h-r4 {
+    height: 4rem;
+}
+
+.h-r5 {
+    height: 5rem;
+}
+
+.h-10 {
+    height: 10%;
+}
+
+.h-15 {
+    height: 15%;
+}
+
+.c-blue {
+    color: var(--blue);
+}
+
+.screen {
+    color: var(--black);
+    background-color: transparent;
+    border: 1px solid var(--black);
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 var(--black);
+    overflow: hidden;
+}
+
+.screen .favorite {
+    border: 1px solid var(--yellow);
+}
+
+.screen .disabled {
+    background-color: var(--light-gray);
+}
+
+.panel {
+    background-color: var(--white);
+    width: 1000px;
+    height: 600px;
+    border: 2px solid var(--black);
+    border-radius: 10px 10px 3px 3px;
+    box-shadow: 10px 10px 0 var(--black);
+    overflow: hidden;
+}
+
+.modal-body {
+    background-color: var(--white);
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--black);
+    border-radius: 10px 10px 3px 3px;
+    box-shadow: 10px 10px 0 var(--black);
+    overflow: hidden;
+}
+
+.modal-content {
+    background-color: transparent;
+    border: 0px solid transparent;
+}
+
+.header {
+    width: 100%;
+    min-height: 50px;
+    height: 10%;
+    border: 0px solid var(--gray);
+    border-bottom: 3px solid;
+}
+
+.body {
+    width: 100%;
+    height: 90%;
+    max-height: 90%;
+}
+
+.column {
+    width: 49%;
+    height: 100%;
+    border-radius: 0 0 3px 3px;
+}
+
+.line {
+    height: 3px;
+    border-radius: 1px;
+    width: 75%;
+    background-color: var(--light-gray);
+}
+
+.selectable {
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+}
+
+.selectable:hover {
+    transform: scale(1.01);
+}
+
+.max-w-80 {
+    max-width: 80%;
+}
+
+.max-h-80 {
+    max-height: 80%;
+}
+
+.h-300 {
+    height: 400px;
+}
+
+.modal {
+    z-index: 1110;
+}
+
+.priority {
+    z-index: 1120;
+}
+
+.less-priority {
+    z-index: 1100;
+}
+
+.select {
+    height: 100%;
+    background-color: transparent;
+    border: 0px solid transparent;
+    font-size: 16px;
+}
+
+/* Media Query */
+
+@media (max-width: 768px) {
+}
+  
+  @media (min-width: 768px) {
+}
+

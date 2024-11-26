@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="fonts/Poppins/Poppins-Regular.ttf" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/jquery.min.js"></script>
+    <script defer src="js/bootstrap.min.js"></script>
+    <script defer src="js/main.js"></script>
+    <script src="js/feather.min.js"></script>
+</head>
+<body>
+    <!--Start-->
+    <div class="fit d-flex flex-column">
+        <div class="panel m-auto">
+            <div class="header d-flex align-items-center bg-blue px-4">
+                <h2>SistemaERP.exe</h2>
+                <div class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-yellow"></div>
+                <div class="round-button d-flex justify-content-center align-items-center bg-red"></div>
+            </div>
+            <div class="body d-flex">
+                <div class="column p-4 d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="f-grow fit-w">
+                        <div class="screen fit p-4">
+                            <div class="row">
+                                <div class="col-12 mb-5"><div onclick="help()" class="button bg-red d-flex"><h5 class="m-auto">Como Utilizar</h5></div></div>
+                                <div id="listall-customers" class="col-12 mt-3 mb-3 d-none"><div onclick="listAll('customers')" class="button d-flex"><h5 class="m-auto">Listar todos Clientes</h5></div></div>
+                                <div id="listall-friends" class="col-12 mb-3 d-none"><div onclick="listAll('friends')" class="button d-flex"><h5 class="m-auto">Listar todos Contatos</h5></div></div>
+                                <div id="listall-adress" class="col-12 mb-3 d-none"><div onclick="listAll('adress')" class="button d-flex"><h5 class="m-auto">Listar todos Endereços</h5></div></div>
+                                <div id="listall-documents" class="col-12 d-none"><div onclick="listAll('documents')" class="button d-flex"><h5 class="m-auto">Listar todos Documentos</h5></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column d-flex flex-column p-4 ms-auto">
+                    <div class="row">
+                        <div class="col-6"><div onclick="openModal('createCustomerModal')" class="button d-flex"><h4 class="m-auto">Novo Cliente</h4></div></div>
+                        <a href="cadastro-completo.html" class="col-6"><div class="button d-flex"><h5 class="m-auto">Novo Cliente Completo</h5></div></a>
+                    </div>
+
+                    <div class="screen mt-4 fit">
+                        <div class="header d-flex justify-content-center align-items-center bg-yellow"><h4>Clientes Disponíveis</h4></div>
+                        <div class="body d-flex flex-column p-4">
+                            <div class="screen selectable d-flex h-r4"><div class="d-flex fit-h align-width bg-red align-items-center justify-content-center"><i class="icon" data-feather="search"></i></div><div class="f-grow px-4"><input type="text" maxlength="8" id="searchCustomer" placeholder="Insira o ID desejado" onchange="buildCustomers(this.value)"></div></div>
+                            <div id="customer-area" class="mt-4 px-2 overflow"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End-->
+
+    <!-- Modal -->
+    <div class="modal fade less-priority" id="help" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>Guia Módulo Cadastro de Cliente.</h3>
+                        <div onclick="closeModal('help')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div class="body d-flex flex-column p-4">
+                        <h3 class="mb-4">As funcionabilidades são as seguintes:</h3>
+                        <h4 class="mb-3">Tela Principal:</h4>
+                        <h5 class="mb-5">
+                            Criar Cliente Completo: Permite o usuário criar um cliente diretamente, com Documento, Contato e Endereços. <br>
+                            Criar Cliente: Permite criar um cliente individualmente e em seguida, criar um Documento, um Contato e Endereço. Cada bloco criado já é relacionado aquele Cliente.  <br>
+                            
+                            Listar Endereços. (Lista todos os endereços)  <br>
+                            Listar Contatos. (Lista todos os contatos)  <br>
+                            Listar Documentos. (Lista todos os documentos)  <br>
+                            Listar Clientes. (Lista todos os clientes)  <br>
+                        </h5>
+
+                        <h4 class="mb-3">Informações do Cliente:</h4>
+                        <h5>
+                            Editar Contato: Permite editar o contato do cliente relacionado.  <br>
+                            Editar Endereço: Permite editar o endereço do cliente relacionado e alterar o seu Endereço Principal.  <br>
+                            Editar Documento: Permite editar o Documento do cliente relacionado.  <br>
+                            
+                            Remover Contato: Deleta o Contato selecionado.  <br>
+                            Remover Documento: Deleta o Documento selecionado.  <br>
+                            Remover Endereços: Deleta o Endereço selecionado.  <br>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+    <div class="modal fade" id="createCustomerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>CriarCliente.exe</h3>
+                        <div onclick="closeModal('createCustomerModal')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div class="body d-flex flex-column p-4">
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Nome:</h4><div class="f-grow ps-1"><input id="customer-register-name" placeholder="Insira o nome" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>CPF/CNPJ:</h4><div class="f-grow ps-1"><input id="customer-register-cpf" placeholder="Insira o CPF ou seu CNPJ" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Email:</h4><div class="f-grow ps-1"><input id="customer-register-email" placeholder="Insira o e-mail de contato" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Telefone:</h4><div class="f-grow ps-1"><input id="customer-register-phone" placeholder="Insira o número de contato" type="text" maxlength="32"></div></div>
+                        <div onclick="createCustomer()" class="button d-flex"><h4 class="m-auto">Salvar</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    
+    <div class="modal fade priority" id="createFriendModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>CriarContato.exe</h3>
+                        <div onclick="closeModal('createFriendModal')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div class="body d-flex flex-column p-4">
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Nome:</h4><div class="f-grow ps-1"><input id="friend-register-name" placeholder="Insira o nome" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Email:</h4><div class="f-grow ps-1"><input id="friend-register-email" placeholder="Insira o e-mail de contato" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Telefone:</h4><div class="f-grow ps-1"><input id="friend-register-phone" placeholder="Insira o número de contato" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Cargo:</h4><div class="f-grow ps-1"><input id="friend-register-role" placeholder="Insira o cargo" type="text" maxlength="32"></div></div>
+                        <div onclick="createFriend()" class="button d-flex"><h4 class="m-auto">Salvar</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <div class="modal fade priority" id="createAdressModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>CriarEndereço.exe</h3>
+                        <div onclick="closeModal('createAdressModal')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div class="body d-flex flex-column p-4">
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>CEP:</h4><div class="f-grow ps-1"><input id="adress-register-cep" placeholder="Insira o CEP" type="text" maxlength="32" onchange="getCep(this.value)"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>País:</h4><div class="f-grow ps-1"><input id="adress-register-country" value="Brasil" placeholder="Insira o país" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Estado:</h4><div class="f-grow ps-1"><input id="adress-register-state" placeholder="Insira o estado" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Cidade:</h4><div class="f-grow ps-1"><input id="adress-register-city" placeholder="Insira a cidade" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Bairro:</h4><div class="f-grow ps-1"><input id="adress-register-neighborhood" placeholder="Insira o bairro" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Logradouro:</h4><div class="f-grow ps-1"><input id="adress-register-place" placeholder="Insira o logradouro" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Número:</h4><div class="f-grow ps-1"><input id="adress-register-number" placeholder="Insira o número" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Complemento:</h4><div class="f-grow ps-1"><input id="adress-register-extra" placeholder="Insira o complemento" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Tipo de Endereço:</h4><div class="f-grow ps-1"><select id="adress-register-type" class="select"><option value="" disabled selected>Selecione o tipo de endereço</option><option value="RESIDENCIAL">Residencial</option><option value="COMERCIAL">Comercial</option><option value="FATURAMENTO">Faturamento</option><option value="ENTREGA">Entrega</option></select></div></div>
+                        <div onclick="createAdress()" class="button d-flex"><h4 class="m-auto">Salvar</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <div class="modal fade priority" id="createDocumentModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>CriarDocumento.exe</h3>
+                        <div onclick="closeModal('createDocumentModal')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div class="body d-flex flex-column p-4">
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Tipo de Documento:</h4><div class="f-grow ps-1"><select id="document-register-type" class="select"><option value="" disabled selected>Selecione o tipo de Documento</option><option value="RG">RG</option><option value="CNH">CNH</option><option value="INSCRICAO_ESTADUAL">Inscrição Estadual</option><option value="PASSAPORTE">Passaporte</option></select></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Número:</h4><div class="f-grow ps-1"><input id="document-register-number" placeholder="Insira o número do documento" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Data de Emissão:</h4><div class="f-grow ps-1"><input id="document-register-date" placeholder="Insira a data de emissão do documento" type="date" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Orgão Emissor:</h4><div class="f-grow ps-1"><input id="document-register-sender" placeholder="Insira o orgão emissor do documento" type="text" maxlength="32"></div></div>
+                        <div onclick="createDocument()" class="button d-flex"><h4 class="m-auto">Salvar</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+    <div class="modal fade" id="editCustomerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog max-h-80 max-w-80 mt-5" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>EditarCliente.exe</h3>
+                        <div onclick="closeModal('editCustomerModal')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div class="body overflow d-flex flex-column p-4">
+                        <div class="row fit p-0 m-0 pb-4">
+                            <div class="col-12 h-300 m-0 mb-5">
+                                <h2 class="mb-2">Área do Cliente</h2>
+                                <div class="screen fit p-4">
+                                    <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Nome:</h4><div class="f-grow ps-1"><input id="customer-edit-name" placeholder="Insira o nome" type="text" maxlength="32"></div></div>
+                                    <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>CPF/CNPJ:</h4><div class="f-grow ps-1"><input id="customer-edit-cpf" placeholder="Insira o CPF ou seu CNPJ" type="text" maxlength="32"></div></div>
+                                    <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Email:</h4><div class="f-grow ps-1"><input id="customer-edit-email" placeholder="Insira o e-mail de contato" type="text" maxlength="32"></div></div>
+                                    <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Telefone:</h4><div class="f-grow ps-1"><input id="customer-edit-phone" placeholder="Insira o número de contato" type="text" maxlength="32"></div></div>
+                                    <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Status:</h4><div class="f-grow ps-1"><select id="customer-edit-status" class="select"><option value="" disabled selected>Status do Cliente</option><option value=true>Habilitado</option><option value=false>Desabilitado</option></select></div></div>
+                                    <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Endereço Principal:</h4><div class="f-grow ps-1"><input id="customer-edit-adress" placeholder="Insira o Endereço Principal" type="text" maxlength="32"></div></div>
+                                    <div class="row p-0 m-0">
+                                        <div class="col-6"><div class="button d-flex" onclick="editCustomer()"><h4 class="m-auto">Salvar</h4></div></div>
+                                        <div class="col-6"><div class="button bg-red d-flex" onclick="deleteCustomer()"><h4 class="m-auto">Deletar</h4></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 h-300 m-0 mt-5 mb-5">
+                                <h2 class="mb-2">Área de Meus Contatos</h2>
+                                <div class="screen fit p-4 pt-4">
+                                    <div class="col-6"><div onclick="openModal('createFriendModal')" class="button d-flex"><h4 class="m-auto">Novo Contato</h4></div></div>
+                                    <div class="screen selectable d-flex h-r4 mt-4"><div class="d-flex fit-h align-width bg-red align-items-center justify-content-center"><i class="icon" data-feather="search"></i></div><div class="f-grow px-4"><input type="text" maxlength="8" id="searchFriend" placeholder="Insira o ID desejado" onchange="buildFriends(this.value)"></div></div>
+                                    <div id="friends-area" class="overflow mt-4 px-2"></div>
+                                </div>
+                            </div>
+                            <div class="col-12 h-300 m-0 mt-5 mb-5">
+                                <h2 class="mb-2">Área de Meus Endereços</h2>
+                                <div class="screen fit p-4 pt-4">
+                                    <div onclick="openModal('createAdressModal')" class="button d-flex"><h4 class="m-auto">Novo Endereço</h4></div>
+                                    <div class="screen selectable d-flex h-r4 mt-4"><div class="d-flex fit-h align-width bg-red align-items-center justify-content-center"><i class="icon" data-feather="search"></i></div><div class="f-grow px-4"><input type="text" maxlength="8" id="searchAdress" placeholder="Insira o ID desejado" onchange="buildAdress(this.value)"></div></div>
+                                    <div id="adress-area" class="overflow mt-4 px-2"></div>
+                                </div>
+                            </div>
+                            <div class="col-12 h-300 m-0 mt-5 mb-5">
+                                <h2 class="mb-2">Área de Meus Documentos</h2>
+                                <div class="screen fit p-4 pt-4">
+                                    <div onclick="openModal('createDocumentModal')" class="button d-flex"><h4 class="m-auto">Novo Documento</h4></div>
+                                    <div class="screen selectable d-flex h-r4 mt-4"><div class="d-flex fit-h align-width bg-red align-items-center justify-content-center"><i class="icon" data-feather="search"></i></div><div class="f-grow px-4"><input type="text" maxlength="8" id="searchDocument" placeholder="Insira o ID desejado" onchange="buildDocument(this.value)"></div></div>
+                                    <div id="document-area" class="overflow mt-4 px-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <div class="modal fade less-priority" id="listAll" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>Dados Completos.exe</h3>
+                        <div onclick="closeModal('listAll')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div id="listAllId" class="body d-flex flex-column p-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="modal fade priority" id="editFriendModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>EditarContato.exe</h3>
+                        <div onclick="closeModal('editFriendModal')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div class="body d-flex flex-column p-4">
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Nome:</h4><div class="f-grow ps-1"><input id="friend-edit-name" placeholder="Insira o nome" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Email:</h4><div class="f-grow ps-1"><input id="friend-edit-email" placeholder="Insira o e-mail de contato" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Telefone:</h4><div class="f-grow ps-1"><input id="friend-edit-phone" placeholder="Insira o número de contato" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Cargo:</h4><div class="f-grow ps-1"><input id="friend-edit-role" placeholder="Insira o cargo" type="text" maxlength="32"></div></div>
+                        <div class="row p-0 m-0">
+                            <div class="col-6"><div class="button d-flex" onclick="editFriend()"><h4 class="m-auto">Salvar</h4></div></div>
+                            <div class="col-6"><div class="button bg-red d-flex" onclick="deleteFriend()"><h4 class="m-auto">Deletar</h4></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="modal fade priority" id="editAdressModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>EditarEndereço.exe</h3>
+                        <div onclick="closeModal('editAdressModal')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div class="body d-flex flex-column p-4">
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>CEP:</h4><div class="f-grow ps-1"><input id="adress-edit-cep" placeholder="Insira o CEP" type="text" maxlength="32" onchange="getCep(this.value)"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>País:</h4><div class="f-grow ps-1"><input id="adress-edit-country" placeholder="Insira o país" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Estado:</h4><div class="f-grow ps-1"><input id="adress-edit-state" placeholder="Insira o estado" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Cidade:</h4><div class="f-grow ps-1"><input id="adress-edit-city" placeholder="Insira a cidade" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Bairro:</h4><div class="f-grow ps-1"><input id="adress-edit-neighborhood" placeholder="Insira o bairro" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Logradouro:</h4><div class="f-grow ps-1"><input id="adress-edit-place" placeholder="Insira o logradouro" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Número:</h4><div class="f-grow ps-1"><input id="adress-edit-number" placeholder="Insira o número" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Complemento:</h4><div class="f-grow ps-1"><input id="adress-edit-extra" placeholder="Insira o complemento" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Tipo de Endereço:</h4><div class="f-grow ps-1"><select id="adress-edit-type" class="select"><option value="" disabled selected>Selecione o tipo de endereço</option><option value="RESIDENCIAL">Residencial</option><option value="COMERCIAL">Comercial</option><option value="FATURAMENTO">Faturamento</option><option value="ENTREGA">Entrega</option></select></div></div>
+                        <div class="row p-0 m-0">
+                            <div class="col-6"><div class="button d-flex" onclick="editAdress()"><h4 class="m-auto">Salvar</h4></div></div>
+                            <div class="col-6"><div class="button bg-red d-flex" onclick="deleteAdress()"><h4 class="m-auto">Deletar</h4></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <div class="modal fade priority" id="editDocumentModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="header d-flex align-items-center bg-blue px-4">
+                        <h3>EditarDocumento.exe</h3>
+                        <div onclick="closeModal('editDocumentModal')" class="round-button d-flex justify-content-center align-items-center ms-auto me-3 bg-red"></div>
+                    </div>
+                    <div class="body d-flex flex-column p-4">
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Tipo de Documento:</h4><div class="f-grow ps-1"><select id="document-edit-type" class="select"><option value="" disabled selected>Selecione o tipo de Documento</option><option value="RG">RG</option><option value="CNH">CNH</option><option value="INSCRICAO_ESTADUAL">Inscrição Estadual</option><option value="PASSAPORTE">Passaporte</option></select></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Número:</h4><div class="f-grow ps-1"><input id="document-edit-number" placeholder="Insira o número do documento" type="text" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Data de Emissão:</h4><div class="f-grow ps-1"><input id="document-edit-date" placeholder="Insira a data de emissão do documento" type="date" maxlength="32"></div></div>
+                        <div class="screen selectable d-flex align-items-center px-4 mb-3 h-r4"><h4>Orgão Emissor:</h4><div class="f-grow ps-1"><input id="document-edit-sender" placeholder="Insira o orgão emissor do documento" type="text" maxlength="32"></div></div>
+                        <div class="row p-0 m-0">
+                            <div class="col-6"><div class="button d-flex" onclick="editDocument()"><h4 class="m-auto">Salvar</h4></div></div>
+                            <div class="col-6"><div class="button bg-red d-flex" onclick="deleteDocument()"><h4 class="m-auto">Deletar</h4></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!--End-->
+
+    <script>feather.replace();</script>
+</body>
+</html>

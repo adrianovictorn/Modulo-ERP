@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Documento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Cadastro de Documento</h2>
+
+    <form id="documentoForm">
+        <label for="tipoDocumento">Tipo de Documento</label>
+        <select id="tipoDocumento" name="tipoDocumento" required>
+            <option value="" disabled selected>Selecione o tipo de documento</option>
+            <option value="INSCRICAO_ESTADUAL">Inscrição Estadual</option>
+            <option value="PASSAPORTE">Passaporte</option>
+            <option value="RG">RG</option>
+            <option value="CNH">CNH</option>
+       
+        </select>
+
+        <label for="numero">Número do Documento</label>
+        <input type="text" id="numero" name="numero" required>
+
+        <label for="dataEmissao">Data de Emissão</label>
+        <input type="date" id="dataEmissao" name="dataEmissao" required>
+
+        <label for="orgaoEmissor">Órgão Emissor</label>
+        <input type="text" id="orgaoEmissor" name="orgaoEmissor" required>
+
+        <button type="submit">Cadastrar Documento</button>
+
+        <p id="mensagem" class="error"></p>
+    </form>
+
+    <script src="js/criar-documento.js"></script>
+</body>

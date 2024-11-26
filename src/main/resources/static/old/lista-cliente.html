@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Clientes</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn-danger {
+            background-color: red;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .extra-info {
+            display: none;
+            margin-top: 10px;
+        }
+        .info-section {
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .info-section h4 {
+            margin-top: 0;
+        }
+        .info-section p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Lista de Clientes</h2>
+
+<form id="buscarClienteForm">
+    <label for="clienteId">Buscar Cliente por ID:</label>
+    <input type="text" id="clienteId" name="clienteId" required>
+    <button type="submit" class="btn">Buscar</button>
+</form>
+
+<table id="clienteTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF/CNPJ</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<div id="extraInfo" class="extra-info">
+    <h3>Informações Adicionais do Cliente</h3>
+
+    <div class="info-section">
+        <h4>Endereço Principal</h4>
+        <p><strong>Tipo:</strong> <span id="tipoEnderecoPrincipal"></span></p>
+        <p><strong>Logradouro:</strong> <span id="logradouroPrincipal"></span></p>
+        <p><strong>Número:</strong> <span id="numeroPrincipal"></span></p>
+        <p><strong>Complemento:</strong> <span id="complementoPrincipal"></span></p>
+        <p><strong>Bairro:</strong> <span id="bairroPrincipal"></span></p>
+        <p><strong>Cidade:</strong> <span id="cidadePrincipal"></span></p>
+        <p><strong>Estado:</strong> <span id="estadoPrincipal"></span></p>
+        <p><strong>CEP:</strong> <span id="cepPrincipal"></span></p>
+        <p><strong>País:</strong> <span id="paisPrincipal"></span></p>
+    </div>
+
+    <div class="info-section">
+        <h4>Outros Endereços</h4>
+        <div id="outrosEnderecos"></div>
+    </div>
+
+    <div class="info-section">
+        <h4>Contatos</h4>
+        <div id="contatos"></div>
+    </div>
+
+    <div class="info-section">
+        <h4>Documentos</h4>
+        <div id="documentos"></div>
+    </div>
+</div>
+
+<script>
+    function listarClientes() {
+        fetch('/clientes')
+            .then(response => response.json())
+            .then(clientes => {
+                const tabela = document.querySelector('#clienteTable tbody');
+                tabela.innerHTML = '';
+                clientes.forEach(cliente => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${cliente.id}</td>
+                        <td>${cliente.nome}</td>
+                        <td>${cliente.cpfCnpj}</td>
+                        <td>${cliente.email}</td>
+                        <td>${cliente.telefone}</td>
+                        <td>
+                            <button class="btn" onclick="editarCliente(${cliente.id})">Editar</button>
+                            <button class="btn btn-danger" onclick="deletarCliente(${cliente.id})">Deletar</button>
+                        </td>
+                    `;
+                    tabela.appendChild(row);
+                });
+            });
+    }
+
+    document.getElementById('buscarClienteForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const id = document.getElementById('clienteId').value;
+
+        fetch(`/clientes/${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Cliente não encontrado');
+                }
+                return response.json();
+            })
+            .then(cliente => {
+                exibirClienteDetalhado(cliente);
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    });
+
+
+    function exibirClienteDetalhado(cliente) {
+        const tabela = document.querySelector('#clienteTable tbody');
+        tabela.innerHTML = ''; 
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${cliente.id}</td>
+            <td>${cliente.nome}</td>
+            <td>${cliente.cpfCnpj}</td>
+            <td>${cliente.email}</td>
+            <td>${cliente.telefone}</td>
+            <td>
+                <button class="btn" onclick="editarCliente(${cliente.id})">Editar</button>
+                <button class="btn btn-danger" onclick="deletarCliente(${cliente.id})">Deletar</button>
+            </td>
+        `;
+        tabela.appendChild(row);
+
+
+        document.getElementById('tipoEnderecoPrincipal').textContent = cliente.enderecoPrincipal.tipoEndereco;
+        document.getElementById('logradouroPrincipal').textContent = cliente.enderecoPrincipal.logradouro;
+        document.getElementById('numeroPrincipal').textContent = cliente.enderecoPrincipal.numero;
+        document.getElementById('complementoPrincipal').textContent = cliente.enderecoPrincipal.complemento;
+        document.getElementById('bairroPrincipal').textContent = cliente.enderecoPrincipal.bairro;
+        document.getElementById('cidadePrincipal').textContent = cliente.enderecoPrincipal.cidade;
+        document.getElementById('estadoPrincipal').textContent = cliente.enderecoPrincipal.estado;
+        document.getElementById('cepPrincipal').textContent = cliente.enderecoPrincipal.cep;
+        document.getElementById('paisPrincipal').textContent = cliente.enderecoPrincipal.pais;
+
+  
+        const outrosEnderecosDiv = document.getElementById('outrosEnderecos');
+        outrosEnderecosDiv.innerHTML = '';
+        cliente.enderecos.forEach(endereco => {
+            outrosEnderecosDiv.innerHTML += `
+                <p><strong>Tipo:</strong> ${endereco.tipoEndereco}, <strong>Logradouro:</strong> ${endereco.logradouro}, <strong>Número:</strong> ${endereco.numero}, <strong>Cidade:</strong> ${endereco.cidade}, <strong>CEP:</strong> ${endereco.cep}</p>
+            `;
+        });
+
+        const contatosDiv = document.getElementById('contatos');
+        contatosDiv.innerHTML = ''; 
+        cliente.contatos.forEach(contato => {
+            contatosDiv.innerHTML += `
+                <p><strong>Nome:</strong> ${contato.nome}, <strong>Email:</strong> ${contato.email}, <strong>Telefone:</strong> ${contato.telefone}</p>
+            `;
+        });
+
+        const documentosDiv = document.getElementById('documentos');
+        documentosDiv.innerHTML = ''; 
+        cliente.documentos.forEach(documento => {
+            documentosDiv.innerHTML += `
+                <p><strong>Número:</strong> ${documento.numero}, <strong>Data Emissão:</strong> ${documento.dataEmissao}, <strong>Órgão Emissor:</strong> ${documento.orgaoEmissor}</p>
+            `;
+        });
+
+        document.getElementById('extraInfo').style.display = 'block';
+    }
+
+    function editarCliente(id) {
+        alert('Funcionalidade de edição ainda não implementada');
+    }
+
+    function deletarCliente(id) {
+        if (confirm('Tem certeza que deseja deletar este cliente?')) {
+            fetch(`/clientes/${id}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (response.ok) {
+                    listarClientes(); // Atualiza a lista de clientes após a exclusão
+                    alert('Cliente deletado com sucesso!');
+                } else {
+                    alert('Erro ao deletar o cliente');
+                }
+            });
+        }
+    }
+
+    // Chama a função para listar todos os clientes ao carregar a página
+    listarClientes();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="fonts/Poppins/Poppins-Regular.ttf" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/bootstrap.min.js"></script>
+    <script defer src="js/main.js"></script>
+    <script src="js/feather.min.js"></script>
+</head>
+<body>
+    <!--Start-->
+    <div class="fit d-flex flex-column">
+        <div class="header mt-auto mx-auto">
+            
+        </div>
+        <div class="body d-flex m-auto justify-content-between mt-4">
+            <div class="row fit-w">
+                <div class="col-4">
+                    <div class="column bg-light-gray">
+                        <div class="header bg-black fit-w p-4 d-flex align-items-center"><h3 class="c-white f-bold">Lista Clientes</h3></div>
+                        <div class="p-4">
+                            <div id="customer-area" class="fit py-4"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="column bg-light-gray">
+                        <div class="header bg-black fit-w p-4 d-flex align-items-center"><h3 class="c-white f-bold">Cadastrar Cliente</h3></div>
+                        <div class="p-4">
+                            <input id="customer-register-name" type="text" placeholder="nome">
+                            <input id="customer-register-cpf" type="text" placeholder="cpf ou cnpj">
+                            <input id="customer-register-email" type="text" placeholder="e-mail">
+                            <input class="mb-5" id="customer-register-phone" type="text" placeholder="telefone">
+                            <div class="button d-flex justify-content-center" onclick="createCustomer()"><h3 class="me-3">Novo Cliente</h3><i data-feather="plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="column bg-light-gray">
+                        <div class="header bg-black fit-w p-4 d-flex align-items-center"><h3 class="c-white f-bold">Editar Cliente</h3></div>
+                        <div id="customer-edit-area" class="p-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>feather.replace();</script>
+    <!--End-->
+</body>
+</html>
