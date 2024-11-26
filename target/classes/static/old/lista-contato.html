@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Contatos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Lista de Contatos</h2>
+    <ul id="contatoList"></ul>
+
+    <script>
+        const apiUrl = '/api/contatos'; 
+
+        async function carregarContatos() {
+            try {
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`Erro ao carregar contatos: ${response.statusText}`);
+                }
+
+                const contatos = await response.json();
+                renderizarLista(contatos);
+            } catch (error) {
+                console.error(error);
+                const lista = document.getElementById('contatoList');
+                lista.innerHTML = '<li>Erro ao carregar contatos.</li>';
+            }
+        }
+
+        function renderizarLista(contatos) {
+            const lista = document.getElementById('contatoList');
+            lista.innerHTML = '';
+
+            contatos.forEach(contato => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    Nome: ${contato.nome}, Telefone: ${contato.telefone}
+                `;
+                lista.appendChild(li);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarContatos);
+    </script>
+</body>
+</html>

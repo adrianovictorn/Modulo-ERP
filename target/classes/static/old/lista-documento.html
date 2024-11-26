@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Documentos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Lista de Documentos</h2>
+    <ul id="documentoList"></ul>
+
+    <script>
+        const apiUrl = '/api/documentos'; 
+
+        async function carregarDocumentos() {
+            try {
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`Erro ao carregar documentos: ${response.statusText}`);
+                }
+
+                const documentos = await response.json();
+                renderizarLista(documentos);
+            } catch (error) {
+                console.error(error);
+                const lista = document.getElementById('documentoList');
+                lista.innerHTML = '<li>Erro ao carregar documentos.</li>';
+            }
+        }
+
+        function renderizarLista(documentos) {
+            const lista = document.getElementById('documentoList');
+            lista.innerHTML = '';
+
+            documentos.forEach(documento => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    Tipo: ${documento.tipo}, Número: ${documento.numero}
+                `;
+                lista.appendChild(li);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarDocumentos);
+    </script>
+</body>
+</html>

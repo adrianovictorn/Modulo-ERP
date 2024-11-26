@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo Cadastro de Cliente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            margin-bottom: 10px;
+            gap: 10px; /* Espaçamento entre os itens */
+        }
+
+        nav ul li {
+            margin: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            padding: 10px 25px; 
+            background-color: #333;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        nav ul li a:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sistema ERP</h1>
+        <nav>
+            <ul>
+                <li><a href="cadastro-completo.html">Cadastrar Cliente</a></li>
+                <li><a href="criar-cliente.html">Criar Cliente</a></li>
+                <li><a href="criar-endereco.html">Criar Endereço</a></li>
+                <li><a href="criar-contato.html">Criar Contato</a></li>
+                <li><a href="criar-documento.html">Criar Documento</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="lista-cliente.html">Listar Cadastros de Clientes</a></li>
+                <li><a href="lista-endereco.html">Listar Endereços</a></li>
+                <li><a href="lista-documento.html">Listar Documentos</a></li>
+                <li><a href="lista-contato.html">Listar Contatos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <p>Bem-vindo ao Módulo de Cadastro de Cliente do Sistema ERP. Utilize o menu acima para navegar pelas funcionalidades do sistema.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sistema ERP - Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
