@@ -1,8 +1,23 @@
 
 
-# Cadastro de Clientes
+## ⚙️ Cadastro de Clientes
 
 Este projeto é uma aplicação para simular um módulo de cadastro de clientes, desenvolvido como parte de um estudo ou trabalho acadêmico. A aplicação utiliza tecnologias modernas para backend, gerenciamento de banco de dados e estruturação de APIs REST.
+
+## 📝 Integrantes do Projeto
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/115894997?v=4" width="100px;" alt="Foto do Integrante Adriano"/><br />
+      <sub><b><a href="https://github.com/adrianovictorn">Adriano Ribeiro</a></b></sub>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/50783223?v=4" width="100px;" alt="Foto do Integrante Pedro Ipolito"/><br />
+      <sub><b><a href="https://github.com/nectaroads">Pedro Hipólito</a></b></sub>
+    </td>
+  </tr>
+</table>
 
 ## 📋 Funcionalidades
 
@@ -71,17 +86,4 @@ Este projeto foi desenvolvido para fins acadêmicos e é aberto para estudo e co
 ---
 
 
-## Integrantes do Projeto
 
-<table>
-  <tr>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/115894997?v=4" width="100px;" alt="Foto do Integrante Adriano"/><br />
-      <sub><b><a href="https://github.com/adrianovictorn">Adriano Ribeiro</a></b></sub>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/50783223?v=4" width="100px;" alt="Foto do Integrante Pedro Ipolito"/><br />
-      <sub><b><a href="https://github.com/nectaroads">Pedro Hipólito</a></b></sub>
-    </td>
-  </tr>
-</table>
