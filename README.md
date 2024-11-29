@@ -1,22 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/q0dfvJ58)
-Com base no objetivo de simular um módulo de cadastro de clientes, aqui está um modelo de README para o seu projeto:
 
----
-
-## Integrantes do Projeto
-
-<table>
-  <tr>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/115894997?v=4" width="100px;" alt="Foto do Integrante Adriano"/><br />
-      <sub><b><a href="https://github.com/adrianovictorn">Adriano Ribeiro</a></b></sub>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/50783223?v=4" width="100px;" alt="Foto do Integrante Pedro Ipolito"/><br />
-      <sub><b><a href="https://github.com/nectaroads">Pedro Hipólito</a></b></sub>
-    </td>
-  </tr>
-</table>
 
 # Cadastro de Clientes
 
@@ -88,4 +70,18 @@ Este projeto foi desenvolvido para fins acadêmicos e é aberto para estudo e co
 
 ---
 
-Caso queira personalizar ou incluir mais detalhes, como as rotas da API ou informações sobre a interface do usuário, é só avisar! 😊
+
+## Integrantes do Projeto
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/115894997?v=4" width="100px;" alt="Foto do Integrante Adriano"/><br />
+      <sub><b><a href="https://github.com/adrianovictorn">Adriano Ribeiro</a></b></sub>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/50783223?v=4" width="100px;" alt="Foto do Integrante Pedro Ipolito"/><br />
+      <sub><b><a href="https://github.com/nectaroads">Pedro Hipólito</a></b></sub>
+    </td>
+  </tr>
+</table>
