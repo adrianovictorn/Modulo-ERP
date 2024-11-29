@@ -1,9 +1,3 @@
-
-
-## ⚙️ Cadastro de Clientes
-
-Este projeto é uma aplicação para simular um módulo de cadastro de clientes, desenvolvido como parte de um estudo ou trabalho acadêmico. A aplicação utiliza tecnologias modernas para backend, gerenciamento de banco de dados e estruturação de APIs REST.
-
 ## 📝 Integrantes do Projeto
 
 <table>
@@ -18,6 +12,11 @@ Este projeto é uma aplicação para simular um módulo de cadastro de clientes,
     </td>
   </tr>
 </table>
+
+## ⚙️ Cadastro de Clientes
+
+Este projeto é uma aplicação para simular um módulo de cadastro de clientes, desenvolvido como parte de um estudo ou trabalho acadêmico. A aplicação utiliza tecnologias modernas para backend, gerenciamento de banco de dados e estruturação de APIs REST.
+
 
 ## 📋 Funcionalidades
 
