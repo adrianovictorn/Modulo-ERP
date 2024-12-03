@@ -15,7 +15,7 @@
 
 ## ⚙️ Cadastro de Clientes
 
-Este projeto é uma aplicação para simular um módulo de cadastro de clientes, desenvolvido como parte de um estudo ou trabalho acadêmico. A aplicação utiliza tecnologias modernas para backend, gerenciamento de banco de dados e estruturação de APIs REST.
+Este projeto é uma aplicação para simular um módulo de cadastro de clientes, desenvolvido como parte de um trabalho acadêmico. A aplicação utiliza tecnologias modernas para backend, gerenciamento de banco de dados e estruturação de APIs REST.
 
 
 ## 📋 Funcionalidades
@@ -34,8 +34,7 @@ Este projeto é uma aplicação para simular um módulo de cadastro de clientes,
 - **Spring Data JPA**: Para manipulação e persistência de dados no banco de dados relacional.
 - **H2 Database**: Banco de dados em memória utilizado para desenvolvimento e testes.
 - **Maven**: Gerenciador de dependências e build.
-- **Thymeleaf** (se aplicável): Para renderização de páginas no front-end.
-- **HTML, CSS e JavaScript**: Para interface do usuário, se houver.
+- **HTML, CSS e JavaScript**: Para interface do usuário.
 
 ## ⚙️ Requisitos
 
