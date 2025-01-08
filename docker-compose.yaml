@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: myuser      # Nome do usuário
+      POSTGRES_PASSWORD: mypassword  # Senha
+      POSTGRES_DB: mydatabase    # Nome do banco de dados
+    ports:
+      - "5432:5432"              # Porta local -> Porta no container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistência de dados
+
+volumes:
+  postgres_data:
